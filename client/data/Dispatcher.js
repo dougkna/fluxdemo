@@ -1,8 +1,8 @@
-module.exports = Dispatcher; 
+module.exports = new Dispatcher(); 
 
 function Dispatcher() {
 	this._callback = {};
-	this._id = 1;
+	this._id = 0;
 }
 
 Dispatcher.prototype.register = function(cb) {
@@ -11,19 +11,8 @@ Dispatcher.prototype.register = function(cb) {
 }
 
 Dispatcher.prototype.dispatch = function(payload) {
-	for (var id in this._callback) {
-		this._callback[id](payload);
+	for (this._id in this._callback) {
+		this._callback[this._id](payload);
+		//console.log("what register does : ", this._callback[this._id])
 	}
 }
-
-
-// var dispatcher = new Dispatcher()
-// var handlerId = dispatcher.register( function( payload ) {
-//   console.log( "GOT PAYLOAD: " + JSON.stringify(payload) )
-//   console.log('handlerId', handlerId)
-//   console.log('dispatcher', dispatcher)
-// } )
-
-// dispatcher.dispatch( { test: 1 } ) // outputs payload to console
-// //dispatcher.unregister( handlerId )
-// dispatcher.dispatch( { test: 2 } )

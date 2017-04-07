@@ -1,33 +1,38 @@
-var ActionTypes = require('./type');
+import ActionTypes from './type';
 //import Dispatcher from './Dispatcher';
-var Dispatcher = require('./Dispatcher')
-var dispatcher = new Dispatcher();
+//var Dispatcher = require('./Dispatcher')
+//var dispatcher = new Dispatcher();
+import Dispatcher from './Dispatcher';
 const EventEmitter = require('events');
 
-var _dispatchID;
-var _messageList = {};
+var _messageList = [];
 
 class Store extends EventEmitter {
 	constructor() {
-		super();
-		_dispatchID = dispatcher.register((action) => {
+		super(Dispatcher);
+		Dispatcher.register((action) => {
 			
+			console.log("dispatcher : ", Dispatcher)
+			console.log("action ", action)
+
 			switch(action.type){
 				case ActionTypes.ACTION_ONE:
+					console.log("action one is picked")
 					var msg = {
 						id: Date.now(),
 						text: action.text,
 					}
-					_messageList[msg.id] = msg;
+					_messageList.push(msg);
 					this.emit('change');
 					break;
 
 				case ActionTypes.ACTION_TWO:
+					console.log("action one is picked")
 					var msg = {
 						id: Date.now(),
 						text: action.text,
 					}
-					_messageList[msg.id] = msg;
+					_messageList.push(msg);
 					this.emit('change');
 					break;
 
@@ -36,21 +41,16 @@ class Store extends EventEmitter {
 					return;
 			}
 
-			dispatcher.dispatch();
+			// Dispatcher.dispatch();
 		});
 	}
 
 	getDispatcher() {
-		return dispatcher;
-	}
-
-	getDispatchID() {
-		console.log(_dispatchID)
-		return _dispatchID;
+		return Dispatcher;
 	}
 
 	getMessageList() {
-		console.log(_messageList)
+		console.log("msgList", _messageList)
 		return _messageList;
 	}
 }

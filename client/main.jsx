@@ -5,6 +5,15 @@ import 'styles/main.scss';
 import React from 'react';
 import { render } from 'react-dom';
 
-import Index from 'components/Index/Index';
+import AppContainer from './AppContainer'
+import Actions from './data/actionCreator'
 
-render(<Index items={[1,2,3]} />, document.getElementById('js-main'));
+render(<AppContainer />, document.getElementById('js-main'));
+
+Actions.doActionOne('My first task');
+Actions.doActionTwo('This is second');
+Actions.doActionTwo('This is second2222');
+
+
+
+
