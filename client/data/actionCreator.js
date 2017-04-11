@@ -1,9 +1,5 @@
 import ActionTypes from './type';
-//import Store from './Store';
 import Dispatcher from './Dispatcher';
-//import Dispatcher from './Dispatcher';
-//var Dispatcher = require('./Dispatcher');
-//var dispatcher = new Dispatcher();
 
 const Actions = {
   doActionOne(text) {
@@ -16,6 +12,13 @@ const Actions = {
    doActionTwo(text) {
     Dispatcher.dispatch({
       type: ActionTypes.ACTION_TWO,
+      text: text,
+    });
+  },
+
+   doActionWrite(text) {
+    Dispatcher.dispatch({
+      type: ActionTypes.ACTION_WRITE,
       text: text,
     });
   },

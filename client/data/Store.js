@@ -1,7 +1,4 @@
 import ActionTypes from './type';
-//import Dispatcher from './Dispatcher';
-//var Dispatcher = require('./Dispatcher')
-//var dispatcher = new Dispatcher();
 import Dispatcher from './Dispatcher';
 const EventEmitter = require('events');
 
@@ -23,16 +20,18 @@ class Store extends EventEmitter {
 						text: action.text,
 					}
 					_messageList.push(msg);
+					//_messageList[msg.id] = msg;
 					this.emit('change');
 					break;
 
-				case ActionTypes.ACTION_TWO:
-					console.log("action one is picked")
+				case ActionTypes.ACTION_WRITE:
+					console.log("action WRITE is picked")
 					var msg = {
 						id: Date.now(),
 						text: action.text,
 					}
 					_messageList.push(msg);
+					//_messageList[msg.id] = msg;
 					this.emit('change');
 					break;
 
@@ -40,8 +39,6 @@ class Store extends EventEmitter {
 					console.log("DO NOTHING");
 					return;
 			}
-
-			// Dispatcher.dispatch();
 		});
 	}
 
